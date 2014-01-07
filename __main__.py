@@ -1,15 +1,31 @@
 from flask import Flask, flash, session, redirect, url_for, escape, request, render_template
+import pymongo
 import os
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
+def busca_registros(filtros={}):
+    #conecta ao mongodb local
+    client = pymongo.MongoClient('localhost', 27017)
+    #define a base utilizada
+    db = client.carscrud
+    if filtros == {}:
+        #busca todos registros na base e coloca em uma lista
+    	registros = db.cars.find()
+	cars_list = []
+        for i in registros:
+            # "decodifica" unicode retornado pelo mongodb
+            cars_list.append(dict([(str(k), str(v)) for k, v in i.items()]))
+	return cars_list
+    return []
 
 @app.route('/')
 def index():
+    carros = busca_registros()
     if 'username' in session:
-        return 'Index page - logado como: %s' % escape(session['username'])
-    return render_template('index.html') #'Index page - nao logado - apenas busca de veiculos'
+        return render_template('index.html', entries=carros, username=escape(session['username']))
+    return render_template('index.html', entries=carros)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -17,23 +33,19 @@ def login():
     if request.method == 'POST':
 	if request.form['username'] == request.form['password']:
             session['username'] = request.form['username']
+   	    session['logged_in'] = True
 	    flash('Logado com sucesso, '+session['username'])
             return redirect(url_for('index'))
 	else:
 	    error = 'usuario ou senha incorretos'
     return render_template('login.html', error=error)
-    return '''
-        <form action="" method="post">
-            <p>Usuario:<input type=text name=username>
-            <p>Senha:<input type=password name=password>
-            <p><input type=submit value=Login>
-        </form>
-    '''
 
 @app.route('/logout')
 def logout():
-    # remove the username from the session if it's there
+    # remove o nome do usuario da sessao, se estiver la
     session.pop('username', None)
+    session['logged_in'] = False
+    flash('Logout com sucesso')
     return redirect(url_for('index'))
 
 

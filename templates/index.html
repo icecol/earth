@@ -1,5 +1,11 @@
 {% extends "layout.html" %}
 {% block body %}
-  <h1>VSD carros</h1>
-  <p>Se já é nosso usuário faça seu <a href="{{ url_for('login') }}">log in</a>
+  <ul class=entries>
+  {% for entry in entries %}
+    <li><strong>{{ entry.modelo }}</strong> | {{ entry.fabricante }} | {{ entry.ano }} | {{ entry.foto }}
+  {% else %}
+    <li><em>Inacreditável. Não temos nenhum carro para sua busca</em>
+  {% endfor %}
+  </ul>
+
 {% endblock %}
