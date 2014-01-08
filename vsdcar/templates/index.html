@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block body %}
+
+ <h3>Busca Veículos</h3>
+  <form action="" method=post>
+    <dl>
+      <dt>Fabricante:
+      <dd><input type=text name=fabricante value="{{ request.form.fabricante }}">
+      <dt>Modelo:
+      <dd><input type=text name=modelo value="{{ request.form.modelo }}">
+      <dt>Ano:
+      <dd><input type=date name=ano value="{{ request.form.ano }}">
+    </dl>
+    <p><input type=submit value=Busca>
+  </form>
+
+  <h2>Carros Disponíveis</h2>
+  <ul class=entries>
+  {% for entry in entries %}
+    <li><strong>{{ entry.modelo }}</strong> | {{ entry.fabricante }} | {{ entry.ano }} | {{ entry.foto }}
+  {% else %}
+    <li><em>Inacreditável. Não temos nenhum carro para sua busca</em>
+  {% endfor %}
+  </ul>
+
+{% endblock %}

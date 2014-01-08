@@ -1,0 +1,27 @@
+<!doctype html>
+<title>VSD carros</title>
+
+<div class=page>
+  <h1>VSD carros</h1>
+
+  <div class=metanav>
+  {% if not session.logged_in %}
+    <p>Se já é nosso usuário faça seu <a href="{{ url_for('login') }}">log in</a></p>
+  {% else %}
+    <p>Seja bem-vindo {{username}}</p>
+  {% endif %}
+  </div>
+
+<div class=flashes>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+    <i>{{ message }}</i>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+</div>
+
+{% block body %}{% endblock %}
+
+</div>
