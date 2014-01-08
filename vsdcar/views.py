@@ -2,15 +2,31 @@ from flask import flash, session, redirect, url_for, escape, request, render_tem
 import pymongo
 import os
 from vsdcar import app
+from flask_wtf import Form
+from wtforms import TextField, IntegerField, FileField
 
+#segredo para controle de sessao
 app.secret_key = os.urandom(24)
+
+#formulario de busca/filtro
+class BuscaForm(Form):
+    fabricante = TextField('Fabricante')
+    modelo = TextField('Modelo')
+    ano = IntegerField('Ano')
+
+#formulario de Edicao/insercao de carros
+class EditForm(Form):
+    fabricante = TextField('Fabricante')
+    modelo = TextField('Modelo')
+    ano = IntegerField('Ano')
+    foto = FileField('Foto')
 
 def busca_registros(filtros={}):
     #conecta ao mongodb local
     client = pymongo.MongoClient('localhost', 27017)
     #define a base utilizada
     db = client.carscrud
-    if filtros == {}:
+    if filtros == {} or filtros == {'Ano': 'None', 'Modelo': '', 'Fabricante': ''}: 
         #busca todos registros na base e coloca em uma lista
     	registros = db.cars.find()
 	cars_list = []
@@ -18,19 +34,21 @@ def busca_registros(filtros={}):
             # "decodifica" unicode retornado pelo mongodb
             cars_list.append(dict([(str(k), str(v)) for k, v in i.items()]))
 	return cars_list
+    #todo: buscar apenas carros que combinem com os filtros
     return []
 
-
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def index():
     carros = busca_registros()
-    if request.method == 'POST' and form.validate():
+    form = BuscaForm(request.form)
+    if request.method == 'POST':
 	#resultados da busca
-	fabricante = search_fields['Fabricante'].value
-        modelo = search_fields['Modelo'].value
-        ano = search_fields['Ano'].value
+	fabricante = str(form.fabricante.data)
+        modelo = str(form.modelo.data)
+        ano = str(form.ano.data)
         filtros = {'Fabricante':fabricante , 'Modelo':modelo , 'Ano':ano}
-
+#	print(filtros)
+	carros = busca_registros(filtros)
     if 'username' in session:
         return render_template('index.html', entries=carros, username=escape(session['username']))
     return render_template('index.html', entries=carros)
@@ -55,3 +73,11 @@ def logout():
     session['logged_in'] = False
     flash('Logout com sucesso')
     return redirect(url_for('index'))
+
+@app.route('/admin')
+def admin():
+    if not 'username' in session:
+	return redirect(url_for('login'))
+    # Edita , adiciona ou remove carro da base
+    carro = EditForm(request.form)
+    return render_template('admin.html', username=escape(session['username']))
