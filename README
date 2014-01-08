@@ -1,0 +1,20 @@
+VSD CAR
+Um simples CRUD para revenda de veiculos
+
+Requisitos:
+==========
+
+MongoDB
+Python
+
+
+
+Inicialização:
+=============
+
+Na primeira execução, Para inicializar os dados de demonstração no MongoDB, utilizar o script:
+inicializa_mongoDB_vsdcar_app.py
+
+Executar a aplicação:
+python vsdcar.py
+
