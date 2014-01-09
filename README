@@ -18,3 +18,8 @@ inicializa_mongoDB_vsdcar_app.py
 Executar a aplicação:
 python vsdcar.py
 
+
+TODO list:
+> Melhorar filtros de busca, ano "de" e "ate", listas de fabricantes e modelos
+> Ao entrar no endereco /admin sem estar logado deve solicitar login e retornar para /admin
+> Adicionar links de edição para o admin

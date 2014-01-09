@@ -74,10 +74,20 @@ def logout():
     flash('Logout com sucesso')
     return redirect(url_for('index'))
 
-@app.route('/admin')
+@app.route('/admin', methods=['GET','POST'])
 def admin():
     if not 'username' in session:
 	return redirect(url_for('login'))
+    form = EditForm(request.form)
+    if request.method == 'POST':
+	carro = {'ano': str(form.ano.data),
+           	 'fabricante': str(form.fabricante.data),
+           	 'modelo': str(form.modelo.data),
+	         'fabricante_lower': str(form.fabricante.data).lower(),
+	         'modelo_lower': str(form.modelo.data).lower(),
+	         'foto': str(form.foto.data)}
+	print(carro)
     # Edita , adiciona ou remove carro da base
-    carro = EditForm(request.form)
     return render_template('admin.html', username=escape(session['username']))
+
+
