@@ -26,7 +26,7 @@ def busca_registros(filtros={}):
     client = pymongo.MongoClient('localhost', 27017)
     #define a base utilizada
     db = client.carscrud
-    if filtros == {} or filtros == {'Ano': 'None', 'Modelo': '', 'Fabricante': ''}: 
+    if filtros == {} or filtros == {'ano': 'none', 'modelo': '', 'fabricante': ''}: 
         #busca todos registros na base e coloca em uma lista
     	registros = db.cars.find()
 	cars_list = []
@@ -34,8 +34,21 @@ def busca_registros(filtros={}):
             # "decodifica" unicode retornado pelo mongodb
             cars_list.append(dict([(str(k), str(v)) for k, v in i.items()]))
 	return cars_list
-    #todo: buscar apenas carros que combinem com os filtros
-    return []
+    # busca apenas carros que combinem com os filtros
+    dict_filtro={}
+    if filtros['fabricante'] != '':
+	dict_filtro['fabricante_lower']=filtros['fabricante']
+    if filtros['modelo'] != '':
+	dict_filtro['modelo_lower']=filtros['modelo']
+    if filtros['ano'] != 'none':
+        dict_filtro['ano']=filtros['ano']
+    registros = db.cars.find(dict_filtro) # 'modelo_lower':filtros['modelo']})
+    cars_list = []
+    for i in registros:
+        # "decodifica" unicode retornado pelo mongodb
+        cars_list.append(dict([(str(k), str(v)) for k, v in i.items()]))
+    return cars_list
+
 
 @app.route('/', methods=['GET','POST'])
 def index():
@@ -43,11 +56,10 @@ def index():
     form = BuscaForm(request.form)
     if request.method == 'POST':
 	#resultados da busca
-	fabricante = str(form.fabricante.data)
-        modelo = str(form.modelo.data)
-        ano = str(form.ano.data)
-        filtros = {'Fabricante':fabricante , 'Modelo':modelo , 'Ano':ano}
-#	print(filtros)
+	fabricante = str(form.fabricante.data).lower()
+        modelo = str(form.modelo.data).lower()
+        ano = str(form.ano.data).lower()
+        filtros = {'fabricante':fabricante , 'modelo':modelo , 'ano':ano}
 	carros = busca_registros(filtros)
     if 'username' in session:
         return render_template('index.html', entries=carros, username=escape(session['username']))
