@@ -10,12 +10,27 @@
   </form>
 
   <h2>Carros Disponíveis</h2>
-  <ul class=entries>
-  {% for entry in entries %}
-    <li><strong>{{ entry.modelo }}</strong> | {{ entry.fabricante }} | {{ entry.ano }} | {{ entry.foto }}
+
+  {% if session.logged_in %}
+
+    <ul class=entries>
+    {% for entry in entries %}
+      <li><strong>{{ entry.modelo }}</strong> | {{ entry.fabricante }} | {{ entry.ano }} | {{ entry.foto }} | <a href="{{ url_for('admin') }}?car={{ entry._id }}"><i>edit</i></a>
+    {% else %}
+      <li><em>Inacreditável. Não temos nenhum carro para sua busca</em>
+    {% endfor %}
+    </ul>
+
   {% else %}
-    <li><em>Inacreditável. Não temos nenhum carro para sua busca</em>
-  {% endfor %}
-  </ul>
+
+    <ul class=entries>
+    {% for entry in entries %}
+      <li><strong>{{ entry.modelo }}</strong> | {{ entry.fabricante }} | {{ entry.ano }} | {{ entry.foto }}
+    {% else %}
+      <li><em>Inacreditável. Não temos nenhum carro para sua busca</em>
+    {% endfor %}
+    </ul>
+
+  {% endif %}
 
 {% endblock %}

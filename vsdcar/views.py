@@ -4,6 +4,7 @@ import os
 from vsdcar import app
 from flask_wtf import Form
 from wtforms import TextField, IntegerField, FileField
+from bson.objectid import ObjectId
 
 #segredo para controle de sessao
 app.secret_key = os.urandom(24)
@@ -26,7 +27,7 @@ def busca_registros(filtros={}):
     client = pymongo.MongoClient('localhost', 27017)
     #define a base utilizada
     db = client.carscrud
-    if filtros == {} or filtros == {'ano': 'none', 'modelo': '', 'fabricante': ''}: 
+    if filtros == {} or filtros == {'ano': 'None', 'modelo': '', 'fabricante': ''}: 
         #busca todos registros na base e coloca em uma lista
     	registros = db.cars.find()
 	cars_list = []
@@ -40,7 +41,7 @@ def busca_registros(filtros={}):
 	dict_filtro['fabricante_lower']=filtros['fabricante']
     if filtros['modelo'] != '':
 	dict_filtro['modelo_lower']=filtros['modelo']
-    if filtros['ano'] != 'none':
+    if filtros['ano'] != 'None':
         dict_filtro['ano']=filtros['ano']
     registros = db.cars.find(dict_filtro) # 'modelo_lower':filtros['modelo']})
     cars_list = []
@@ -58,7 +59,7 @@ def index():
 	#resultados da busca
 	fabricante = str(form.fabricante.data).lower()
         modelo = str(form.modelo.data).lower()
-        ano = str(form.ano.data).lower()
+        ano = str(form.ano.data)
         filtros = {'fabricante':fabricante , 'modelo':modelo , 'ano':ano}
 	carros = busca_registros(filtros)
     if 'username' in session:
@@ -91,6 +92,15 @@ def admin():
     if not 'username' in session:
 	return redirect(url_for('login'))
     form = EditForm(request.form)
+    car = request.args.get('car','')
+    if car:
+	#conecta ao mongodb local
+        client = pymongo.MongoClient('localhost', 27017)
+        #define a base utilizada
+        db = client.carscrud
+	print(car)
+	carro = db.cars.find_one({"_id":ObjectId(car)})
+	print(carro)
     if request.method == 'POST':
 	carro = {'ano': str(form.ano.data),
            	 'fabricante': str(form.fabricante.data),
@@ -101,5 +111,4 @@ def admin():
 	print(carro)
     # Edita , adiciona ou remove carro da base
     return render_template('admin.html', username=escape(session['username']))
-
 
