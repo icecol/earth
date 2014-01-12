@@ -92,16 +92,16 @@ def admin():
     if not 'username' in session:
 	return redirect(url_for('login'))
     form = EditForm(request.form)
+    carro = {}
     car = request.args.get('car','')
     if car:
 	#conecta ao mongodb local
         client = pymongo.MongoClient('localhost', 27017)
         #define a base utilizada
         db = client.carscrud
-	print(car)
 	carro = db.cars.find_one({"_id":ObjectId(car)})
-	print(carro)
     if request.method == 'POST':
+	# testar se o usuario quer Salvar ou Excluir o registro
 	carro = {'ano': str(form.ano.data),
            	 'fabricante': str(form.fabricante.data),
            	 'modelo': str(form.modelo.data),
@@ -110,5 +110,5 @@ def admin():
 	         'foto': str(form.foto.data)}
 	print(carro)
     # Edita , adiciona ou remove carro da base
-    return render_template('admin.html', username=escape(session['username']))
+    return render_template('admin.html', username=escape(session['username']), carro=carro)
 

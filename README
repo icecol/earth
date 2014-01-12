@@ -4,9 +4,10 @@ Um simples CRUD para revenda de veiculos
 Requisitos:
 ==========
 
-MongoDB
-Python
+MongoDB 2.0.4
+Python 2.7.3
 
+Bibliotecas: flask, pymongo, flask_wtf
 
 
 Inicialização:
@@ -23,3 +24,7 @@ TODO list:
 > Melhorar filtros de busca, ano "de" e "ate", listas de fabricantes e modelos
 > Ao entrar no endereco /admin sem estar logado deve solicitar login e retornar para /admin
 > Abrir dados do item a ser editado, quando clicar no link editar da lista de carros
+> Armazenar e exibir imagens
+> Excluir registros
+
+> deploy na Amazon
