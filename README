@@ -26,5 +26,5 @@ TODO list:
 > Abrir dados do item a ser editado, quando clicar no link editar da lista de carros
 > Armazenar e exibir imagens
 > Excluir registros
-
-> deploy na Amazon
+> Paginação, ordenação e filtro de resultados
+> Memcached

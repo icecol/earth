@@ -26,8 +26,8 @@
       <dd><input type=file name=foto value="{{ request.form.foto }}">
 {% endif %}
     </dl>
-    <input type=submit value=Salvar>
-    <input type=submit value=Excluir>
+    <input type=submit name=Salvar value=Salvar>
+    <input type=submit name=Excluir value=Excluir>
 {%if carro%}
     <input type=reset value=Desfazer>
 {%else%}

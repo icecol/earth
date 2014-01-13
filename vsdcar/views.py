@@ -101,7 +101,14 @@ def admin():
         db = client.carscrud
 	carro = db.cars.find_one({"_id":ObjectId(car)})
     if request.method == 'POST':
-	# testar se o usuario quer Salvar ou Excluir o registro
+	if request.form['Excluir']:
+	    print('excluir')
+	    print(car)
+	    db.cars.remove({"_id":ObjectId(car)})
+	    return redirect(url_for('index'))
+	elif request.form['Salvar']:
+	    print('salvar')
+
 	carro = {'ano': str(form.ano.data),
            	 'fabricante': str(form.fabricante.data),
            	 'modelo': str(form.modelo.data),
