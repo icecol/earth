@@ -123,15 +123,148 @@ new_car = {'ano': '2011',
 	   'foto': 'fotoFit.jpg'}
 #insere novo item
 car_id = cars.insert(new_car)
-fabricante = 'VW'
-modelo = 'Tiguan'
+
 #item a ser adicionado
+fabricante = 'Ford'
+modelo = 'Focus'
 new_car = {'ano': '2012',
 	   'fabricante': fabricante,
            'modelo': modelo,
            'fabricante_lower': fabricante.lower(),
            'modelo_lower': modelo.lower(),
-	   'foto': 'fotoTiguan.jpg'}
+	   'foto': 'fotoFocus.jpg'}
+#insere novo item
+car_id = cars.insert(new_car)
+
+#item a ser adicionado
+fabricante = 'Ford'
+modelo = 'Ecosport'
+new_car = {'ano': '2013',
+	   'fabricante': fabricante,
+           'modelo': modelo,
+           'fabricante_lower': fabricante.lower(),
+           'modelo_lower': modelo.lower(),
+	   'foto': 'fotoEcoo.jpg'}
+#insere novo item
+car_id = cars.insert(new_car)
+
+#item a ser adicionado
+fabricante = 'VW'
+modelo = 'Golf'
+new_car = {'ano': '2014',
+	   'fabricante': fabricante,
+           'modelo': modelo,
+           'fabricante_lower': fabricante.lower(),
+           'modelo_lower': modelo.lower(),
+	   'foto': 'fotoGolf.jpg'}
+#insere novo item
+car_id = cars.insert(new_car)
+
+#item a ser adicionado
+fabricante = 'VW'
+modelo = 'Golf'
+new_car = {'ano': '2010',
+	   'fabricante': fabricante,
+           'modelo': modelo,
+           'fabricante_lower': fabricante.lower(),
+           'modelo_lower': modelo.lower(),
+	   'foto': 'fotoGolff.jpg'}
+#insere novo item
+car_id = cars.insert(new_car)
+
+#item a ser adicionado
+fabricante = 'GM'
+modelo = 'Sonic'
+new_car = {'ano': '2013',
+	   'fabricante': fabricante,
+           'modelo': modelo,
+           'fabricante_lower': fabricante.lower(),
+           'modelo_lower': modelo.lower(),
+	   'foto': 'fotoSonic.jpg'}
+#insere novo item
+car_id = cars.insert(new_car)
+
+#item a ser adicionado
+fabricante = 'Ford'
+modelo = 'Focus'
+new_car = {'ano': '2010',
+	   'fabricante': fabricante,
+           'modelo': modelo,
+           'fabricante_lower': fabricante.lower(),
+           'modelo_lower': modelo.lower(),
+	   'foto': 'fotoFoocus.jpg'}
+#insere novo item
+car_id = cars.insert(new_car)
+
+#item a ser adicionado
+fabricante = 'Honda'
+modelo = 'City'
+new_car = {'ano': '2011',
+	   'fabricante': fabricante,
+           'modelo': modelo,
+           'fabricante_lower': fabricante.lower(),
+           'modelo_lower': modelo.lower(),
+	   'foto': 'fotoCity.jpg'}
+#insere novo item
+car_id = cars.insert(new_car)
+
+#item a ser adicionado
+fabricante = 'Ford'
+modelo = 'Fiesta'
+new_car = {'ano': '2009',
+	   'fabricante': fabricante,
+           'modelo': modelo,
+           'fabricante_lower': fabricante.lower(),
+           'modelo_lower': modelo.lower(),
+	   'foto': 'fotoFFiesta.jpg'}
+#insere novo item
+car_id = cars.insert(new_car)
+
+#item a ser adicionado
+fabricante = 'Ford'
+modelo = 'Fiesta'
+new_car = {'ano': '2010',
+	   'fabricante': fabricante,
+           'modelo': modelo,
+           'fabricante_lower': fabricante.lower(),
+           'modelo_lower': modelo.lower(),
+	   'foto': 'fotoFFiiesta.jpg'}
+#insere novo item
+car_id = cars.insert(new_car)
+
+#item a ser adicionado
+fabricante = 'Nissan'
+modelo = 'Tiida'
+new_car = {'ano': '2012',
+	   'fabricante': fabricante,
+           'modelo': modelo,
+           'fabricante_lower': fabricante.lower(),
+           'modelo_lower': modelo.lower(),
+	   'foto': 'fotoTiida.jpg'}
+#insere novo item
+car_id = cars.insert(new_car)
+
+#item a ser adicionado
+fabricante = 'Nissan'
+modelo = 'Versa'
+new_car = {'ano': '2011',
+	   'fabricante': fabricante,
+           'modelo': modelo,
+           'fabricante_lower': fabricante.lower(),
+           'modelo_lower': modelo.lower(),
+	   'foto': 'fotoVersa.jpg'}
+#insere novo item
+car_id = cars.insert(new_car)
+
+#item a ser adicionado
+fabricante = 'Ford'
+modelo = 'Fiesta'
+new_car = {'ano': '2009',
+	   'fabricante': fabricante,
+           'modelo': modelo,
+           'fabricante_lower': fabricante.lower(),
+           'modelo_lower': modelo.lower(),
+	   'foto': 'fotoFFiesta.jpg'}
 #insere novo item
 car_id = cars.insert(new_car)
 
