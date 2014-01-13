@@ -24,7 +24,6 @@ TODO list:
 > Melhorar validação Formulario de carros
 > Melhorar autenticação e controles de sessão
 > Melhorar filtros de busca, ano "de" e "ate", Utilizar listas(cadastraveis) de fabricantes e modelos
-> Ao entrar no endereco /admin sem estar logado deve solicitar login e retornar para /admin
 > Armazenar e exibir imagens. (também na adicao, edicao e remocao)
 > Paginação, ordenação e filtro de resultados
 > Memcached
