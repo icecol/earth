@@ -257,14 +257,14 @@ new_car = {'ano': '2011',
 car_id = cars.insert(new_car)
 
 #item a ser adicionado
-fabricante = 'Ford'
-modelo = 'Fiesta'
-new_car = {'ano': '2009',
+fabricante = 'Nissan'
+modelo = 'Versa'
+new_car = {'ano': '2012',
 	   'fabricante': fabricante,
            'modelo': modelo,
            'fabricante_lower': fabricante.lower(),
            'modelo_lower': modelo.lower(),
-	   'foto': 'fotoFFiesta.jpg'}
+	   'foto': 'fotoVVersa.jpg'}
 #insere novo item
 car_id = cars.insert(new_car)
 
