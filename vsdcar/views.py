@@ -102,30 +102,38 @@ def admin():
         db = client.carscrud
 	carro = db.cars.find_one({"_id":ObjectId(car)})
     if request.method == 'POST':
+	#captura campos do formulario
+	#Todo: validar se todos os campos estao preenchidos
+	carro = {'ano': str(form.ano.data),
+                 'fabricante': str(form.fabricante.data),
+                 'modelo': str(form.modelo.data),
+                 'fabricante_lower': str(form.fabricante.data).lower(),
+                 'modelo_lower': str(form.modelo.data).lower(),
+                 'foto': str(form.foto.data)}
+        print(carro)
 	if request.form['Acao'] == 'Excluir':
 	    if not car:
 		return render_template('admin.html', username=escape(session['username']), carro=carro)
 	    db.cars.remove({"_id":ObjectId(car)})
 	    return redirect(url_for('index'))
 	if request.form['Acao'] == 'Salvar':
-	    print('salvar')
-	    #validar se todos os campos estao preenchidos
-	    carro = {'ano': str(form.ano.data),
-            	     'fabricante': str(form.fabricante.data),
-           	     'modelo': str(form.modelo.data),
-	             'fabricante_lower': str(form.fabricante.data).lower(),
-	             'modelo_lower': str(form.modelo.data).lower(),
-	             'foto': str(form.foto.data)}
-	    print(carro)
 	    #conecta ao mongodb local
             client = pymongo.MongoClient('localhost', 27017)
             #define a base utilizada
             db = client.carscrud
 	    #define a collection
 	    cars = db.cars
-	    #insere novo item
-	    car_id = cars.insert(carro)
-    	    return redirect(url_for('index'))
+	    #novo carro
+	    if not car:
+	        #insere novo item
+	        car_id = cars.insert(carro)
+    	        return redirect(url_for('index'))
+	    #alteracao em carro existente
+	    else:
+		carro['_id']=ObjectId(car)
+		cars.save(carro)
+		print(carro)
+    	        return redirect(url_for('index'))
     # Edita carro da base
     return render_template('admin.html', username=escape(session['username']), carro=carro)
 
