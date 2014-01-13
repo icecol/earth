@@ -21,10 +21,10 @@ python vsdcar.py
 
 
 TODO list:
+> Adicionar novo carro
+> Editar carro
 > Melhorar filtros de busca, ano "de" e "ate", listas de fabricantes e modelos
 > Ao entrar no endereco /admin sem estar logado deve solicitar login e retornar para /admin
-> Abrir dados do item a ser editado, quando clicar no link editar da lista de carros
 > Armazenar e exibir imagens
-> Excluir registros
 > Paginação, ordenação e filtro de resultados
 > Memcached
